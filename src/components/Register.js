@@ -4,15 +4,17 @@ import Button from "react-bootstrap/Button";
 import "../styles/costum.css";
 import axios from "axios";
 
-export default function Login() {
+export default function Register() {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const submitForm = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:8000/auth/login", {
+      .post("http://localhost:8000/auth/register", {
         username: username,
+        email: email,
         password: password,
       })
       .then(
@@ -31,11 +33,14 @@ export default function Login() {
   const passwordInputChange = (event) => {
     setPassword(event.target.value);
   };
+  const emailInputChange = (event) => {
+    setEmail(event.target.value);
+  };
 
   return (
     <div className="setlogin">
       <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="formBasiName">
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
@@ -45,6 +50,15 @@ export default function Login() {
           />
         </Form.Group>
 
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            onChange={emailInputChange}
+            value={email}
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
