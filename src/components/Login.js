@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/costum.css";
 import axios from "axios";
 
 export default function Login() {
+  const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +20,7 @@ export default function Login() {
       .then(
         (response) => {
           localStorage.setItem("token", response.data.token);
-          console.log(localStorage.getItem("token"));
+          setTimeout(history.push("/mainpage"), 2000);
         },
         (error) => {
           console.log(error);
