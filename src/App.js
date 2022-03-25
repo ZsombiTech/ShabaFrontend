@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import HeadNavbar from "./components/HeadNavbar";
 import Login from "./components/Login";
@@ -8,37 +8,49 @@ import axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
-  const [loggedIn, setloggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [postData, setPostData] = useState();
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };
-
-  axios.post("http://localhost:8000/posts", {}, config).then(
-    (res) => {
-      if (res.data.response === "Good") {
-        setloggedIn(true);
+  useEffect(() => {
+    axios.post("http://localhost:8000/posts", {}, config).then(
+      (res) => {
+        if (res.data.response === "Good") {
+          setPostData(res.data.data);
+          setLoggedIn(true);
+        }
+      },
+      (error) => {
+        console.log(error);
       }
-    },
-    (error) => {
-      console.log(error);
-    }
-  );
+    );
+  }, []);
 
   return (
     <Router>
       <div className="App">
-        <HeadNavbar />
-        <div className="centered">
-          <Switch>
-            <Route path="/login">
+        <Switch>
+          <Route path="/login">
+            <HeadNavbar loggedIn={loggedIn} />
+            <div className="centered">
               <Login />
-            </Route>
-            <Route path="/register">
+            </div>
+          </Route>
+
+          <Route path="/register">
+            <HeadNavbar loggedIn={loggedIn} />
+            <div className="centered">
               <Register />
-            </Route>
-            <Route path="/mainpage">{loggedIn && <MainPage />}</Route>
-          </Switch>
-        </div>
+            </div>
+          </Route>
+          <Route path="/mainpage">
+            <HeadNavbar loggedIn={loggedIn} />
+            <div className="centered">
+              {loggedIn && <MainPage postData={postData} />}
+            </div>
+          </Route>
+        </Switch>
       </div>
     </Router>
   );

@@ -22,6 +22,7 @@ export default function Register() {
       .then(
         (response) => {
           localStorage.setItem("token", response.data.token);
+          localStorage.setItem("username", username);
           setTimeout(history.push("/mainpage"), 2000);
         },
         (error) => {
