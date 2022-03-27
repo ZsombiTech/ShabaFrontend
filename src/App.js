@@ -53,8 +53,10 @@ function App() {
             <div className="centered">
               {postData ? (
                 <MainPage postData={postData} loggedIn={loggedIn} />
-              ) : (
+              ) : loggedIn ? (
                 <Loading />
+              ) : (
+                <Error />
               )}
             </div>
           </Route>
