@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import "../styles/costum.css";
 import axios from "axios";
 
-export default function Login() {
+export default function Login(props) {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -21,12 +21,15 @@ export default function Login() {
         (response) => {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("username", username);
-          setTimeout(history.push("/mainpage"), 2000);
+          props.setLoggedIn(true);
         },
         (error) => {
           console.log(error);
         }
-      );
+      )
+      .then(() => {
+        history.push("/mainpage");
+      });
   };
 
   const usernameInputChange = (event) => {

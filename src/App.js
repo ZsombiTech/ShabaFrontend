@@ -4,6 +4,7 @@ import HeadNavbar from "./components/HeadNavbar";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Error from "./components/Error";
+import Loading from "./components/Loading";
 import MainPage from "./components/MainPage";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -18,15 +19,15 @@ function App() {
     axios.post("http://localhost:8000/posts", {}, config).then(
       (res) => {
         if (res.data.response === "Good") {
-          setPostData(res.data.data);
           setLoggedIn(true);
+          setPostData(res.data.data);
         }
       },
       (error) => {
         console.log(error);
       }
     );
-  }, []);
+  }, [loggedIn]);
 
   return (
     <Router>
@@ -35,20 +36,24 @@ function App() {
           <Route path="/login">
             <HeadNavbar loggedIn={loggedIn} />
             <div className="centered">
-              <Login />
+              <Login setLoggedIn={setLoggedIn} />
             </div>
           </Route>
 
           <Route path="/register">
             <HeadNavbar loggedIn={loggedIn} />
             <div className="centered">
-              <Register />
+              <Register setLoggedIn={setLoggedIn} />
             </div>
           </Route>
           <Route path="/mainpage">
             <HeadNavbar loggedIn={loggedIn} />
             <div className="centered">
-              <MainPage postData={postData} loggedIn={loggedIn} />
+              {postData ? (
+                <MainPage postData={postData} loggedIn={loggedIn} />
+              ) : (
+                <Loading />
+              )}
             </div>
           </Route>
           <Route>

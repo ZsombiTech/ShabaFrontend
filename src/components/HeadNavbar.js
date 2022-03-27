@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 
 export default function HeadNavbar(props) {
   const [username, setUsername] = useState("");
@@ -9,6 +10,11 @@ export default function HeadNavbar(props) {
     setUsername(localStorage.getItem("username"));
   });
 
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+  };
+
   return (
     <Navbar>
       <Container>
@@ -16,7 +22,15 @@ export default function HeadNavbar(props) {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           {props.loggedIn && (
-            <Navbar.Text>Signed in as: {username}</Navbar.Text>
+            <>
+              <Navbar.Text className="mr-11">
+                Signed in as: {username}
+              </Navbar.Text>
+
+              <Button onClick={handleLogout} href="/login">
+                Logout
+              </Button>
+            </>
           )}
         </Navbar.Collapse>
       </Container>
