@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Error from "./components/Error";
 import Loading from "./components/Loading";
+import Account from "./components/Account";
 import MainPage from "./components/MainPage";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -55,6 +56,10 @@ function App() {
                 <Loading />
               )}
             </div>
+          </Route>
+          <Route path="/account">
+            <HeadNavbar loggedIn={loggedIn} />
+            <div className="centered">{loggedIn ? <Account /> : <Error />}</div>
           </Route>
           <Route>
             <HeadNavbar loggedIn={loggedIn} />

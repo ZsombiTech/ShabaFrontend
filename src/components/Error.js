@@ -11,9 +11,7 @@ export default function Error(props) {
 
       {!props.loggedIn && (
         <>
-          <h4 className="mb-10">
-            Maybe try to refresh the page or login again
-          </h4>
+          <h4 className="mb-10">Maybe try to log in again</h4>
 
           <Button href="/login" size="lg">
             Login

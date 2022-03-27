@@ -18,7 +18,9 @@ export default function HeadNavbar(props) {
   return (
     <Navbar>
       <Container>
-        <Navbar.Brand href="#home">SHABA</Navbar.Brand>
+        <Navbar.Brand href={props.loggedIn ? "/mainpage" : "/login"}>
+          SHABA
+        </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           {props.loggedIn && (
