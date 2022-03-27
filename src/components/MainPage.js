@@ -6,17 +6,21 @@ export default function MainPage(props) {
   console.log(props.loggedIn);
   return (
     <>
-      {props.loggedIn ? (
-        props.postData.map((data, key) => (
-          <Cardd
-            key={key}
-            username={data.username}
-            description={data.description}
-            imageUrl={data.imageUrl}
-          />
-        ))
+      {props.postData.length > 0 ? (
+        props.loggedIn ? (
+          props.postData.map((data, key) => (
+            <Cardd
+              key={key}
+              username={data.username}
+              description={data.description}
+              imageUrl={data.imageUrl}
+            />
+          ))
+        ) : (
+          <Error />
+        )
       ) : (
-        <Error />
+        <h1 className="mt-56">No post to show...</h1>
       )}
     </>
   );

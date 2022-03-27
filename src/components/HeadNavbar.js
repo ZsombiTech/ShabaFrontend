@@ -29,6 +29,10 @@ export default function HeadNavbar(props) {
                 <a href="/account"> Signed in as: {username}</a>
               </Navbar.Text>
 
+              <Button href="/newpost" className="mr-3">
+                New Post
+              </Button>
+
               <Button onClick={handleLogout} href="/login">
                 Logout
               </Button>
