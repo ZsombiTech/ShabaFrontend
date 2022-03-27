@@ -42,41 +42,53 @@ export default function Register() {
   };
 
   return (
-    <div className="setlogin">
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasiName">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter username"
-            onChange={usernameInputChange}
-            value={username}
-          />
-        </Form.Group>
+    <>
+      <div className="aligncenter">
+        <h1 className="">Register an account</h1>
+        <div className="setlogin">
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasiName">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter username"
+                onChange={usernameInputChange}
+                value={username}
+              />
+            </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            onChange={emailInputChange}
-            value={email}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            onChange={passwordInputChange}
-            value={password}
-          />
-        </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                onChange={emailInputChange}
+                value={email}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                onChange={passwordInputChange}
+                value={password}
+              />
+            </Form.Group>
 
-        <Button variant="primary" type="submit" onClick={submitForm}>
-          Login
-        </Button>
-      </Form>
-    </div>
+            <Button
+              variant="primary"
+              type="submit"
+              size="lg"
+              className="mb-11"
+              onClick={submitForm}
+            >
+              Register
+            </Button>
+          </Form>
+        </div>
+        <a href="/login">Login to your account</a>
+      </div>
+    </>
   );
 }

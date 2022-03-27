@@ -3,6 +3,7 @@ import "./App.css";
 import HeadNavbar from "./components/HeadNavbar";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Error from "./components/Error";
 import MainPage from "./components/MainPage";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -47,8 +48,12 @@ function App() {
           <Route path="/mainpage">
             <HeadNavbar loggedIn={loggedIn} />
             <div className="centered">
-              {loggedIn && <MainPage postData={postData} />}
+              <MainPage postData={postData} loggedIn={loggedIn} />
             </div>
+          </Route>
+          <Route>
+            <HeadNavbar loggedIn={loggedIn} />
+            <Error loggedIn={loggedIn} />
           </Route>
         </Switch>
       </div>

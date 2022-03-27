@@ -37,32 +37,44 @@ export default function Login() {
   };
 
   return (
-    <div className="setlogin">
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter username"
-            onChange={usernameInputChange}
-            value={username}
-          />
-        </Form.Group>
+    <>
+      <div className="aligncenter">
+        <h1 className="">Login to your account</h1>
+        <div className="setlogin ">
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter username"
+                onChange={usernameInputChange}
+                value={username}
+              />
+            </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            onChange={passwordInputChange}
-            value={password}
-          />
-        </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                onChange={passwordInputChange}
+                value={password}
+              />
+            </Form.Group>
 
-        <Button variant="primary" type="submit" onClick={submitForm}>
-          Login
-        </Button>
-      </Form>
-    </div>
+            <Button
+              variant="primary"
+              type="submit"
+              size="lg"
+              className="mb-11"
+              onClick={submitForm}
+            >
+              Login
+            </Button>
+          </Form>
+        </div>
+      </div>
+      <a href="/register">Already have an account?</a>
+    </>
   );
 }
