@@ -42,7 +42,7 @@ export default function Login(props) {
   return (
     <>
       <div className="aligncenter">
-        <h1 className="">Login to your account</h1>
+        <h1>Login to your account</h1>
         <div className="setlogin ">
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
