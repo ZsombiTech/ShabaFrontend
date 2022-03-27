@@ -24,7 +24,7 @@ export default function HeadNavbar(props) {
           {props.loggedIn && (
             <>
               <Navbar.Text className="mr-11">
-                Signed in as: {username}
+                <a href="/account"> Signed in as: {username}</a>
               </Navbar.Text>
 
               <Button onClick={handleLogout} href="/login">
