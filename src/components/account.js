@@ -7,9 +7,12 @@ export default function Account() {
   const username = localStorage.getItem("username");
   const [userdatas, setUserDatas] = useState();
   const [wantedit, setWantEdit] = useState(true);
+  const [userdesc, setUserDesc] = useState("basicc");
+
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/users:${username}`, config)
@@ -22,7 +25,13 @@ export default function Account() {
     setWantEdit(false);
   };
 
-  const saveEditsHandler = () => {};
+  const saveEditsHandler = () => {
+    setWantEdit(true);
+  };
+
+  const textareaHandler = (event) => {
+    setUserDesc(event.target.value);
+  };
 
   return (
     <>
@@ -51,14 +60,14 @@ export default function Account() {
                               <button className="btn1 btnn-dark">Edit Profile</button>
       </div>*/}
                 {wantedit ? (
-                  <div className="text mt-3">
-                    Eleanor Pena is a creator of minimalistic x bold graphics
-                    and digital artwork. Artist/ Creative Director by Day #NFT
-                    minting@ with FND night.
-                  </div>
+                  <div className="text mt-3 mb-8 w-52">{userdesc}</div>
                 ) : (
-                  <textarea className="edittextarea">
-                    Enter text here...
+                  <textarea
+                    className="edittextarea"
+                    onChange={textareaHandler}
+                    value={userdesc}
+                  >
+                    {userdesc}
                   </textarea>
                 )}
 
