@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 export default function Account() {
   const username = localStorage.getItem("username");
   const [userdatas, setUserDatas] = useState();
-  const [wantedit, setWantEdit] = useState(false);
+  const [wantedit, setWantEdit] = useState(true);
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };
@@ -19,7 +19,7 @@ export default function Account() {
   }, []);
 
   const editHandler = () => {
-    setWantEdit(true);
+    setWantEdit(false);
   };
 
   const saveEditsHandler = () => {};
@@ -57,22 +57,22 @@ export default function Account() {
                     minting@ with FND night.
                   </div>
                 ) : (
-                  <textarea rows="4" cols="50" name="comment" form="usrform">
+                  <textarea className="edittextarea">
                     Enter text here...
                   </textarea>
                 )}
 
                 <div className=" d-flex mt-2">
                   {wantedit ? (
-                    <button className="btn1 btnn-dark" onclick={editHandler}>
+                    <button className="btn1 btnn-dark" onClick={editHandler}>
                       Edit Description
                     </button>
                   ) : (
                     <button
                       className="btn1 btnn-dark"
-                      onclick={saveEditsHandler}
+                      onClick={saveEditsHandler}
                     >
-                      Edit Description
+                      Save edits
                     </button>
                   )}
                 </div>

@@ -92,3 +92,12 @@ hr .new1 {
 .date {
   background-color: #ccc;
 }
+
+.edittextarea {
+  margin-bottom: 2vw;
+  margin-top: 2vw;
+  resize: none;
+  width: 15vw;
+  border: 2px solid black;
+  border-radius: 4px;
+}
