@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 export default function Account() {
   const username = localStorage.getItem("username");
   const [userdatas, setUserDatas] = useState();
+  const [wantedit, setWantEdit] = useState(false);
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };
@@ -16,6 +17,12 @@ export default function Account() {
         setUserDatas(response.data.docs[0]);
       });
   }, []);
+
+  const editHandler = () => {
+    setWantEdit(true);
+  };
+
+  const saveEditsHandler = () => {};
 
   return (
     <>
@@ -43,12 +50,31 @@ export default function Account() {
                 {/*<div className=" d-flex mt-2">
                               <button className="btn1 btnn-dark">Edit Profile</button>
       </div>*/}
-                <div className="text mt-3">
-                  Eleanor Pena is a creator of minimalistic x bold graphics and
-                  digital artwork.
-                  <br />
-                  <br /> Artist/ Creative Director by Day #NFT minting@ with FND
-                  night.
+                {wantedit ? (
+                  <div className="text mt-3">
+                    Eleanor Pena is a creator of minimalistic x bold graphics
+                    and digital artwork. Artist/ Creative Director by Day #NFT
+                    minting@ with FND night.
+                  </div>
+                ) : (
+                  <textarea rows="4" cols="50" name="comment" form="usrform">
+                    Enter text here...
+                  </textarea>
+                )}
+
+                <div className=" d-flex mt-2">
+                  {wantedit ? (
+                    <button className="btn1 btnn-dark" onclick={editHandler}>
+                      Edit Description
+                    </button>
+                  ) : (
+                    <button
+                      className="btn1 btnn-dark"
+                      onclick={saveEditsHandler}
+                    >
+                      Edit Description
+                    </button>
+                  )}
                 </div>
 
                 <div className=" px-2 rounded mt-4 date ">

@@ -60,8 +60,9 @@
 }
 
 .btn1 {
-  height: 40px;
-  width: 150px;
+  height: 30px;
+  width: 130px;
+  border-radius: 4px;
   border: none;
   background-color: #000;
   color: #aeaeae;
