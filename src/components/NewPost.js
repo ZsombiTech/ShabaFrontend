@@ -49,25 +49,25 @@ export default function NewPost() {
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Description</Form.Label>
-              <Form.Control type="text" placeholder="Description" />
+              <Form.Control
+                type="text"
+                placeholder="Description"
+                onChange={descInputChange}
+                value={desc}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Tags (separated by commas)</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Tags"
-                onChange={descInputChange}
-                value={desc}
+                onChange={tagsInputChange}
+                value={tags}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="Everyone can see it"
-                onChange={tagsInputChange}
-                value={tags}
-              />
+              <Form.Check type="checkbox" label="Everyone can see it" />
             </Form.Group>
             <Button
               variant="primary"
@@ -81,7 +81,7 @@ export default function NewPost() {
         </div>
       ) : (
         <div className="aligncenter">
-          <h1 className="mb-36">Publish a new post</h1>
+          <h1 className="mb-36">Succesfully published</h1>
           <Button variant="primary" type="submit" size="lg" href="/mainpage">
             Go to main page
           </Button>
