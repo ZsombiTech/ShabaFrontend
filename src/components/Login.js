@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/costum.css";
+import PopUp from "./PopUp";
 import axios from "axios";
 
 export default function Login(props) {
@@ -10,12 +11,17 @@ export default function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [authenticproblem, setAuthenticproblem] = useState(true);
+  const [message, setMessage] = useState();
   const [seen, setSeen] = useState(false);
 
-  const togglePop = () => {};
+  const togglePop = () => {
+    setSeen((seen) => !seen);
+    console.log(seen);
+  };
 
   const submitForm = (event) => {
     event.preventDefault();
+    togglePop();
     axios
       .post("http://localhost:8000/auth/login", {
         username: username,
@@ -29,7 +35,7 @@ export default function Login(props) {
             localStorage.setItem("username", username);
             props.setLoggedIn(true);
           } else {
-            console.log(response.data.response);
+            setMessage(response.data.response);
           }
         },
         (error) => {
@@ -89,6 +95,7 @@ export default function Login(props) {
         </div>
       </div>
       <a href="/register">Already have an account?</a>
+      {seen && <PopUp toggle={togglePop} message={message} />}
     </>
   );
 }
