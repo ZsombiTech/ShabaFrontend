@@ -12,7 +12,7 @@ export default function PopUp(props) {
         <span className="close" onClick={handleClick}>
           x
         </span>
-        <h2>R</h2>
+        <h2 className="modall_text">{props.message}</h2>
       </div>
     </div>
   );

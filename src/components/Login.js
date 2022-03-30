@@ -10,43 +10,52 @@ export default function Login(props) {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [authenticproblem, setAuthenticproblem] = useState(true);
   const [message, setMessage] = useState();
   const [seen, setSeen] = useState(false);
+  const [blank, setBlank] = useState(true);
 
-  const togglePop = () => {
-    setSeen((seen) => !seen);
+  const togglePopFalse = () => {
+    setSeen(false);
     console.log(seen);
   };
 
+  const togglePopTrue = () => {
+    setSeen(true);
+    console.log(seen);
+  };
   const submitForm = (event) => {
     event.preventDefault();
-    togglePop();
-    axios
-      .post("http://localhost:8000/auth/login", {
-        username: username,
-        password: password,
-      })
-      .then(
-        (response) => {
-          if (response.data.response == "correct") {
-            setAuthenticproblem(false);
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("username", username);
-            props.setLoggedIn(true);
-          } else {
-            setMessage(response.data.response);
+    setUsername((username) => username.replace(/\s/g, ""));
+    setPassword((password) => password.replace(/\s/g, ""));
+    if (username == "" || password == "") {
+      setMessage("Please fill out correctly");
+      togglePopTrue();
+    } else {
+      setBlank(false);
+    }
+    if (!blank) {
+      axios
+        .post("http://localhost:8000/auth/login", {
+          username: username,
+          password: password,
+        })
+        .then(
+          (response) => {
+            if (response.data.response == "correct") {
+              history.push("/mainpage");
+              localStorage.setItem("token", response.data.token);
+              localStorage.setItem("username", username);
+              props.setLoggedIn(true);
+            } else {
+              setMessage(response.data.response);
+              togglePopTrue();
+            }
+          },
+          (error) => {
+            console.log(error);
           }
-        },
-        (error) => {
-          console.log(error);
-        }
-      )
-      .then(() => {
-        if (!authenticproblem) {
-          history.push("/mainpage");
-        }
-      });
+        );
+    }
   };
 
   const usernameInputChange = (event) => {
@@ -95,7 +104,7 @@ export default function Login(props) {
         </div>
       </div>
       <a href="/register">Already have an account?</a>
-      {seen && <PopUp toggle={togglePop} message={message} />}
+      {seen && <PopUp toggle={togglePopFalse} message={message} />}
     </>
   );
 }
