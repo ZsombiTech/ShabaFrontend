@@ -9,6 +9,10 @@ export default function Login(props) {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [authenticproblem, setAuthenticproblem] = useState(true);
+  const [seen, setSeen] = useState(false);
+
+  const togglePop = () => {};
 
   const submitForm = (event) => {
     event.preventDefault();
@@ -19,16 +23,23 @@ export default function Login(props) {
       })
       .then(
         (response) => {
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("username", username);
-          props.setLoggedIn(true);
+          if (response.data.response == "correct") {
+            setAuthenticproblem(false);
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("username", username);
+            props.setLoggedIn(true);
+          } else {
+            console.log(response.data.response);
+          }
         },
         (error) => {
           console.log(error);
         }
       )
       .then(() => {
-        history.push("/mainpage");
+        if (!authenticproblem) {
+          history.push("/mainpage");
+        }
       });
   };
 

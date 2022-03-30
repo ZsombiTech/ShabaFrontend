@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [message, setMessage] = useState();
   const [postData, setPostData] = useState();
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
