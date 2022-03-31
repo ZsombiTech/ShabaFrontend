@@ -23,6 +23,7 @@ export default function NewPost() {
             username: localStorage.getItem("username"),
             description: desc,
             tags: tags,
+            url: url,
           },
           config
         )
@@ -57,13 +58,19 @@ export default function NewPost() {
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Image URL (not required)</Form.Label>
-              <Form.Control type="url" placeholder="URL" pattern="https://.*" />
+              <Form.Control
+                type="url"
+                placeholder="URL"
+                pattern="https://.*"
+                onChange={urlInputChange}
+                value={url}
+              />
               <Form.Label>Description</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Description"
-                onChange={urlInputChange}
-                value={url}
+                onChange={descInputChange}
+                value={desc}
                 required
               />
             </Form.Group>

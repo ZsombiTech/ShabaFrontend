@@ -53,7 +53,7 @@ function App() {
             <HeadNavbar loggedIn={loggedIn} />
             <div className="centered">
               {postData ? (
-                <MainPage postData={postData} loggedIn={loggedIn} />
+                <MainPage postData={postData.reverse()} loggedIn={loggedIn} />
               ) : loggedIn ? (
                 <Loading />
               ) : (
