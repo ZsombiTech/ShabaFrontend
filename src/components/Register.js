@@ -21,15 +21,11 @@ export default function Register(props) {
   };
 
   const submitForm = (event) => {
-    setUsername((username) => username.replace(/\s/g, ""));
-    setEmail((email) => email.replace(/\s/g, ""));
-    setPassword((password) => password.replace(/\s/g, ""));
-    event.preventDefault();
-    if (username == "" || email == "" || password == "") {
-      setMessage("Please fill out correctly");
-      togglePop();
-    } else {
+    if (username != "" && email != "" && password != "") {
+      event.preventDefault();
       setBlank(false);
+    } else {
+      setBlank(true);
     }
     if (!blank) {
       axios
@@ -77,6 +73,7 @@ export default function Register(props) {
                 placeholder="Enter username"
                 onChange={usernameInputChange}
                 value={username}
+                required
               />
             </Form.Group>
 
@@ -87,6 +84,7 @@ export default function Register(props) {
                 placeholder="Enter email"
                 onChange={emailInputChange}
                 value={email}
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -96,6 +94,7 @@ export default function Register(props) {
                 placeholder="Password"
                 onChange={passwordInputChange}
                 value={password}
+                required
               />
             </Form.Group>
 

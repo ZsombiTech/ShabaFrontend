@@ -14,6 +14,7 @@ export default function MainPage(props) {
                 key={key}
                 username={data.username}
                 description={data.description}
+                tags={data.tags}
                 imageUrl={data.imageUrl}
               />
             ))

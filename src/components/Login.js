@@ -24,14 +24,11 @@ export default function Login(props) {
     console.log(seen);
   };
   const submitForm = (event) => {
-    event.preventDefault();
-    setUsername((username) => username.replace(/\s/g, ""));
-    setPassword((password) => password.replace(/\s/g, ""));
-    if (username == "" || password == "") {
-      setMessage("Please fill out correctly");
-      togglePopTrue();
-    } else {
+    if (username != "" || password != "") {
+      event.preventDefault();
       setBlank(false);
+    } else {
+      setBlank(true);
     }
     if (!blank) {
       axios
@@ -78,6 +75,7 @@ export default function Login(props) {
                 placeholder="Enter username"
                 onChange={usernameInputChange}
                 value={username}
+                required
               />
             </Form.Group>
 
@@ -88,6 +86,7 @@ export default function Login(props) {
                 placeholder="Password"
                 onChange={passwordInputChange}
                 value={password}
+                required
               />
             </Form.Group>
 
