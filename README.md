@@ -1,4 +1,4 @@
-#SHABA
+# ShabaFrontend
 
 SHABA is social media platform where people can share their project ideas and other developers or just everyday people can rate the idea. The purpose of the app is to give a feedback about the demand and the originality before actually accomplishing the idea.
 
