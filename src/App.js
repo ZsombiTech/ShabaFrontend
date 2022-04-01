@@ -8,6 +8,7 @@ import Loading from "./components/Loading";
 import Account from "./components/Account";
 import NewPost from "./components/NewPost";
 import ViewProfile from "./components/ViewProfile";
+import ProjectDetail from "./components/ProjectDetail";
 import MainPage from "./components/MainPage";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -93,6 +94,16 @@ function App() {
             <div className="centered">
               {loggedIn ? (
                 <ViewProfile loggedIn={loggedIn} />
+              ) : (
+                <Error loggedIn={loggedIn} />
+              )}
+            </div>
+          </Route>
+          <Route path="/projectdetail">
+            <HeadNavbar loggedIn={loggedIn} />
+            <div className="centered">
+              {loggedIn ? (
+                <ProjectDetail loggedIn={loggedIn} />
               ) : (
                 <Error loggedIn={loggedIn} />
               )}

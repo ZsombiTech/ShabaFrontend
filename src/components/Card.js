@@ -7,6 +7,9 @@ export default function Card(props) {
   const handleLink = () => {
     localStorage.setItem("searchusername", props.username);
   };
+  const handleButton = () => {
+    localStorage.setItem("projectname", props.description);
+  };
 
   return (
     <Carddd style={{ width: "18rem", marginBottom: "5rem" }}>
@@ -14,7 +17,9 @@ export default function Card(props) {
         <Carddd.Img src={props.url}></Carddd.Img>
         <Carddd.Title>{props.description}</Carddd.Title>
         <Carddd.Text>{props.tags}</Carddd.Text>
-        <Button variant="primary">Check it out</Button>
+        <Link onClick={handleButton} to="/projectdetail">
+          <Button variant="primary">Check it out</Button>
+        </Link>
         <br />
         <br />
         <Carddd.Text>
