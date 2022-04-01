@@ -1,5 +1,6 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import Cardd from "./Card";
+
 import Error from "./Error";
 
 export default function MainPage(props) {
@@ -14,7 +15,8 @@ export default function MainPage(props) {
                 key={key}
                 username={data.username}
                 description={data.description}
-                imageUrl={data.imageUrl}
+                tags={data.tags}
+                url={data.url}
               />
             ))
           ) : (

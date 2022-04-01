@@ -3,33 +3,56 @@ import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/costum.css";
+import PopUp from "./PopUp";
 import axios from "axios";
 
 export default function Login(props) {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState();
+  const [seen, setSeen] = useState(false);
+  const [blank, setBlank] = useState(true);
 
+  const togglePopFalse = () => {
+    setSeen(false);
+    console.log(seen);
+  };
+
+  const togglePopTrue = () => {
+    setSeen(true);
+    console.log(seen);
+  };
   const submitForm = (event) => {
-    event.preventDefault();
-    axios
-      .post("http://localhost:8000/auth/login", {
-        username: username,
-        password: password,
-      })
-      .then(
-        (response) => {
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("username", username);
-          props.setLoggedIn(true);
-        },
-        (error) => {
-          console.log(error);
-        }
-      )
-      .then(() => {
-        history.push("/mainpage");
-      });
+    if (username != "" || password != "") {
+      event.preventDefault();
+      setBlank(false);
+    } else {
+      setBlank(true);
+    }
+    if (!blank) {
+      axios
+        .post("http://localhost:8000/auth/login", {
+          username: username,
+          password: password,
+        })
+        .then(
+          (response) => {
+            if (response.data.response == "correct") {
+              history.push("/mainpage");
+              localStorage.setItem("token", response.data.token);
+              localStorage.setItem("username", username);
+              props.setLoggedIn(true);
+            } else {
+              setMessage(response.data.response);
+              togglePopTrue();
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
   };
 
   const usernameInputChange = (event) => {
@@ -52,6 +75,7 @@ export default function Login(props) {
                 placeholder="Enter username"
                 onChange={usernameInputChange}
                 value={username}
+                required
               />
             </Form.Group>
 
@@ -62,6 +86,7 @@ export default function Login(props) {
                 placeholder="Password"
                 onChange={passwordInputChange}
                 value={password}
+                required
               />
             </Form.Group>
 
@@ -78,6 +103,7 @@ export default function Login(props) {
         </div>
       </div>
       <a href="/register">Already have an account?</a>
+      {seen && <PopUp toggle={togglePopFalse} message={message} />}
     </>
   );
 }

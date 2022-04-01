@@ -7,7 +7,8 @@ export default function Account() {
   const username = localStorage.getItem("username");
   const [userdatas, setUserDatas] = useState();
   const [wantedit, setWantEdit] = useState(true);
-  const [userdesc, setUserDesc] = useState("basicc");
+  const [userdesc, setUserDesc] = useState();
+  const [or, setOr] = useState(false);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -18,8 +19,9 @@ export default function Account() {
       .get(`http://localhost:8000/users:${username}`, config)
       .then((response) => {
         setUserDatas(response.data.docs[0]);
+        setUserDesc(response.data.docs[0].description);
       });
-  }, []);
+  }, [or]);
 
   const editHandler = () => {
     setWantEdit(false);
@@ -27,6 +29,16 @@ export default function Account() {
 
   const saveEditsHandler = () => {
     setWantEdit(true);
+
+    axios
+      .post(
+        `http://localhost:8000/setdesc`,
+        { description: userdesc, id: userdatas._id },
+        config
+      )
+      .then((response) => {
+        setOr((og) => !og);
+      });
   };
 
   const textareaHandler = (event) => {
@@ -35,7 +47,7 @@ export default function Account() {
 
   return (
     <>
-      {userdatas ? (
+      {userdatas || or ? (
         <>
           <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
             <div className="card p-4">
@@ -60,15 +72,15 @@ export default function Account() {
                               <button className="btn1 btnn-dark">Edit Profile</button>
       </div>*/}
                 {wantedit ? (
-                  <div className="text mt-3 mb-8 w-52">{userdesc}</div>
+                  <div className="text mt-3 mb-8 w-52">
+                    {userdatas.description}
+                  </div>
                 ) : (
                   <textarea
                     className="edittextarea"
                     onChange={textareaHandler}
                     value={userdesc}
-                  >
-                    {userdesc}
-                  </textarea>
+                  ></textarea>
                 )}
 
                 <div className=" d-flex mt-2">

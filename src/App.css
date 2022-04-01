@@ -1,11 +1,9 @@
 .App {
-  text-align: center; 
-  display:flex;
+  text-align: center;
+  display: flex;
   flex-direction: column;
- 
 }
-.centered{
-
+.centered {
   align-items: center;
   justify-content: center;
   align-self: center;
@@ -44,4 +42,44 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.modall {
+  border: 1px solid black;
+  top: 0vw;
+  left: 0vw;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  display: block;
+  height: 100%;
+  overflow-x: visible;
+  overflow-y: visible;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modall_content {
+  background-color: white;
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  width: 40%;
+  height: 20%;
+  display: block;
+  padding: 20px;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+.modall_text {
+  padding-top: 2.5vw;
+}
+.close {
+  color: Black;
+  float: right;
+}
+
+.close:hover {
+  color: cyan;
+  cursor: pointer;
 }

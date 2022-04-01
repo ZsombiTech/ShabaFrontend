@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import PopUp from "./PopUp";
 import "../styles/costum.css";
 import axios from "axios";
 
@@ -10,28 +11,43 @@ export default function Register(props) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [blank, setBlank] = useState(true);
+  const [message, setMessage] = useState();
+  const [seen, setSeen] = useState(false);
+
+  const togglePop = () => {
+    setSeen((seen) => !seen);
+    console.log(seen);
+  };
 
   const submitForm = (event) => {
-    event.preventDefault();
-    axios
-      .post("http://localhost:8000/auth/register", {
-        username: username,
-        email: email,
-        password: password,
-      })
-      .then(
-        (response) => {
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("username", username);
-          props.setLoggedIn(true);
-        },
-        (error) => {
-          console.log(error);
-        }
-      )
-      .then(() => {
-        history.push("/mainpage");
-      });
+    if (username != "" && email != "" && password != "") {
+      event.preventDefault();
+      setBlank(false);
+    } else {
+      setBlank(true);
+    }
+    if (!blank) {
+      axios
+        .post("http://localhost:8000/auth/register", {
+          username: username,
+          email: email,
+          password: password,
+        })
+        .then(
+          (response) => {
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("username", username);
+            props.setLoggedIn(true);
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
+        .then(() => {
+          history.push("/mainpage");
+        });
+    }
   };
 
   const usernameInputChange = (event) => {
@@ -57,6 +73,7 @@ export default function Register(props) {
                 placeholder="Enter username"
                 onChange={usernameInputChange}
                 value={username}
+                required
               />
             </Form.Group>
 
@@ -67,6 +84,7 @@ export default function Register(props) {
                 placeholder="Enter email"
                 onChange={emailInputChange}
                 value={email}
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -76,6 +94,7 @@ export default function Register(props) {
                 placeholder="Password"
                 onChange={passwordInputChange}
                 value={password}
+                required
               />
             </Form.Group>
 
@@ -91,6 +110,7 @@ export default function Register(props) {
           </Form>
         </div>
         <a href="/login">Login to your account</a>
+        {seen && <PopUp toggle={togglePop} message={message} />}
       </div>
     </>
   );
