@@ -13,6 +13,7 @@ export default function HeadNavbar(props) {
   const handleLogout = () => {
     localStorage.removeItem("username");
     localStorage.removeItem("token");
+    localStorage.removeItem("searchusername");
   };
 
   return (

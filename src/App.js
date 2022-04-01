@@ -38,11 +38,16 @@ function App() {
       setLoggedIn(false);
       localStorage.removeItem("username");
       localStorage.removeItem("token");
+      localStorage.removeItem("searchusername");
     }
     if (window.location.pathname == "/register") {
       setLoggedIn(false);
       localStorage.removeItem("username");
       localStorage.removeItem("token");
+      localStorage.removeItem("searchusername");
+    }
+    if (window.location.pathname != "/viewprofile") {
+      localStorage.removeItem("searchusername");
     }
   }
 
@@ -86,7 +91,11 @@ function App() {
           <Route path="/viewprofile">
             <HeadNavbar loggedIn={loggedIn} />
             <div className="centered">
-              {loggedIn ? <ViewProfile /> : <Error />}
+              {loggedIn ? (
+                <ViewProfile loggedIn={loggedIn} />
+              ) : (
+                <Error loggedIn={loggedIn} />
+              )}
             </div>
           </Route>
           <Route>

@@ -18,7 +18,7 @@ export default function Card(props) {
         <br />
         <br />
         <Carddd.Text>
-          <Link to="/viewprofile" onClick={handleLink}>
+          <Link onClick={handleLink} to="/viewprofile">
             Posted by {props.username}
           </Link>
         </Carddd.Text>

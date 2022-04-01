@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Loading from "./Loading";
+import Error from "./Error";
 import Button from "react-bootstrap/Button";
 
-export default function ViewProfile() {
+export default function ViewProfile(props) {
   const [userdatas, setUserDatas] = useState();
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };
+
+  const searchusernamee = localStorage.getItem("searchusername");
 
   useEffect(() => {
     const searchusername = localStorage.getItem("searchusername");
@@ -19,6 +22,7 @@ export default function ViewProfile() {
         console.log(response.data.docs[0]);
       });
   }, []);
+
   return (
     <>
       {userdatas ? (
@@ -54,8 +58,10 @@ export default function ViewProfile() {
           </div>
           <Button href="/mainpage">Back to the main page</Button>
         </div>
-      ) : (
+      ) : searchusernamee ? (
         <Loading />
+      ) : (
+        <Error loggedIn={props.loggedIn} />
       )}
     </>
   );
