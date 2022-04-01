@@ -40,15 +40,20 @@ function App() {
       localStorage.removeItem("username");
       localStorage.removeItem("token");
       localStorage.removeItem("searchusername");
+      localStorage.removeItem("projectname");
     }
     if (window.location.pathname == "/register") {
       setLoggedIn(false);
       localStorage.removeItem("username");
       localStorage.removeItem("token");
       localStorage.removeItem("searchusername");
+      localStorage.removeItem("projectname");
     }
     if (window.location.pathname != "/viewprofile") {
       localStorage.removeItem("searchusername");
+    }
+    if (window.location.pathname != "/projectdetail") {
+      localStorage.removeItem("projectname");
     }
   }
 
