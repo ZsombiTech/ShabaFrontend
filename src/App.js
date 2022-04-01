@@ -32,6 +32,19 @@ function App() {
     );
   }, [loggedIn]);
 
+  if (loggedIn) {
+    if (window.location.pathname == "/login") {
+      setLoggedIn(false);
+      localStorage.removeItem("username");
+      localStorage.removeItem("token");
+    }
+    if (window.location.pathname == "/register") {
+      setLoggedIn(false);
+      localStorage.removeItem("username");
+      localStorage.removeItem("token");
+    }
+  }
+
   return (
     <Router>
       <div className="App">
