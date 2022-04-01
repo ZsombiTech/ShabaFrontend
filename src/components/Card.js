@@ -1,8 +1,13 @@
 import React from "react";
 import Carddd from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 export default function Card(props) {
+  const handleLink = () => {
+    localStorage.setItem("searchusername", props.username);
+  };
+
   return (
     <Carddd style={{ width: "18rem", marginBottom: "5rem" }}>
       <Carddd.Body>
@@ -12,7 +17,11 @@ export default function Card(props) {
         <Button variant="primary">Check it out</Button>
         <br />
         <br />
-        <Carddd.Text>Posted by {props.username}</Carddd.Text>
+        <Carddd.Text>
+          <Link to="/viewprofle" onClick={handleLink}>
+            Posted by {props.username}
+          </Link>
+        </Carddd.Text>
       </Carddd.Body>
     </Carddd>
   );
