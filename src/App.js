@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import HeadNavbar from "./components/HeadNavbar";
 import Login from "./components/Login";
@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const loggedInn = useRef(false);
 
   const [postData, setPostData] = useState();
   const config = {
@@ -24,6 +25,7 @@ function App() {
     axios.post("http://localhost:8000/posts", {}, config).then(
       (res) => {
         if (res.data.response === "Good") {
+          loggedInn.current = true;
           setLoggedIn(true);
           setPostData(res.data.data);
         }
@@ -64,14 +66,14 @@ function App() {
           <Route path="/login">
             <HeadNavbar loggedIn={loggedIn} />
             <div className="centered">
-              <Login setLoggedIn={setLoggedIn} />
+              <Login setLoggedIn={setLoggedIn} loggedInn={loggedInn} />
             </div>
           </Route>
 
           <Route path="/register">
             <HeadNavbar loggedIn={loggedIn} />
             <div className="centered">
-              <Register setLoggedIn={setLoggedIn} />
+              <Register setLoggedIn={setLoggedIn} loggedInn={loggedInn} />
             </div>
           </Route>
           <Route path="/mainpage">
@@ -79,7 +81,7 @@ function App() {
             <div className="centered">
               {postData ? (
                 <MainPage postData={postData.reverse()} loggedIn={loggedIn} />
-              ) : loggedIn ? (
+              ) : loggedInn ? (
                 <Loading />
               ) : (
                 <Error />
@@ -88,16 +90,20 @@ function App() {
           </Route>
           <Route path="/account">
             <HeadNavbar loggedIn={loggedIn} />
-            <div className="centered">{loggedIn ? <Account /> : <Error />}</div>
+            <div className="centered">
+              {loggedInn ? <Account /> : <Error />}
+            </div>
           </Route>
           <Route path="/newpost">
             <HeadNavbar loggedIn={loggedIn} />
-            <div className="centered">{loggedIn ? <NewPost /> : <Error />}</div>
+            <div className="centered">
+              {loggedInn ? <NewPost /> : <Error />}
+            </div>
           </Route>
           <Route path="/viewprofile">
             <HeadNavbar loggedIn={loggedIn} />
             <div className="centered">
-              {loggedIn ? (
+              {loggedInn ? (
                 <ViewProfile loggedIn={loggedIn} />
               ) : (
                 <Error loggedIn={loggedIn} />
