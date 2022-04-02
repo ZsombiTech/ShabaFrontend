@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "./Loading";
-import Carddd from "react-bootstrap/Card";
+import PostCardProfile from "./PostCardProfile";
 import "../styles/costum.css";
 
 export default function OwnPosts() {
   const [postdata, setPostData] = useState();
+  const [refr, setRefr] = useState(true);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -21,7 +22,7 @@ export default function OwnPosts() {
         setPostData(response.data);
         console.log(response.data);
       });
-  }, []);
+  }, [refr]);
 
   return (
     <>
@@ -29,22 +30,12 @@ export default function OwnPosts() {
       {postdata ? (
         postdata.length == 0 ? (
           <Loading truee={true} />
-        ) : (
+        ) : refr ? (
           postdata.map((item, key) => (
-            <Carddd style={{ width: "18rem", marginBottom: "3rem" }} key={key}>
-              <Carddd.Body className="aligncenter2">
-                <Carddd.Img src={item.url}></Carddd.Img>
-                <Carddd.Title>{item.description}</Carddd.Title>
-                <Carddd.Text>{item.tags}</Carddd.Text>
-                <br />
-                <br />
-                <div className="flex">
-                  <label>❤</label>
-                  <p className="ml-2">{item.likes}</p>
-                </div>
-              </Carddd.Body>
-            </Carddd>
+            <PostCardProfile item={item} key={key} setRefr={setRefr} />
           ))
+        ) : (
+          <Loading />
         )
       ) : (
         <Loading truee={false} />
