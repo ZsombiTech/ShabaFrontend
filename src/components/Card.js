@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Carddd from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Heart from "react-animated-heart";
@@ -7,8 +7,10 @@ import "../styles/costum.css";
 import axios from "axios";
 
 export default function Card(props) {
-  const [isClick, setClick] = useState(false);
+  const [isClick, setClick] = useState();
+  const numm = useRef(0);
   const [first, setFirst] = useState(true);
+
   const handleLink = () => {
     localStorage.setItem("searchusername", props.username);
   };
@@ -26,6 +28,15 @@ export default function Card(props) {
   };
 
   useEffect(() => {
+    numm.current = numm.current + 1;
+    if (numm.current == 1) {
+      props.likedBy.map((item) => {
+        if (item == localStorage.getItem("username")) {
+          setClick(true);
+        }
+      });
+    }
+
     axios
       .post(
         `http://localhost:8000/likepost`,
@@ -33,6 +44,7 @@ export default function Card(props) {
           clicked: isClick,
           id: props.id,
           first: first,
+
           username: localStorage.getItem("username"),
         },
         config

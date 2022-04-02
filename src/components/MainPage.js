@@ -18,6 +18,7 @@ export default function MainPage(props) {
                 tags={data.tags}
                 url={data.url}
                 id={data._id}
+                likedBy={data.likedBy}
               />
             ))
           ) : (
