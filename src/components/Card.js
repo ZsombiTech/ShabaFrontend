@@ -8,11 +8,17 @@ import axios from "axios";
 
 export default function Card(props) {
   const [isClick, setClick] = useState(false);
+  const [first, setFirst] = useState(true);
   const handleLink = () => {
     localStorage.setItem("searchusername", props.username);
   };
   const handleButton = () => {
     localStorage.setItem("projectname", props.description);
+  };
+
+  const heartHandler = () => {
+    setFirst(false);
+    setClick(!isClick);
   };
 
   const config = {
@@ -24,8 +30,9 @@ export default function Card(props) {
       .post(
         `http://localhost:8000/likepost:${props.description}`,
         {
-          isClick: isClick,
-          description: props.description,
+          clicked: isClick,
+          id: props.id,
+          first: first,
           username: localStorage.getItem("username"),
         },
         config
@@ -60,11 +67,7 @@ export default function Card(props) {
           </Link>
         </Carddd.Text>
       </Carddd.Body>
-      <Heart
-        isClick={isClick}
-        onClick={() => setClick(!isClick)}
-        className="heart"
-      />
+      <Heart isClick={isClick} onClick={heartHandler} className="heart" />
     </Carddd>
   );
 }

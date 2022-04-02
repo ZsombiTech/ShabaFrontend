@@ -17,6 +17,7 @@ export default function MainPage(props) {
                 description={data.description}
                 tags={data.tags}
                 url={data.url}
+                id={data._id}
               />
             ))
           ) : (
