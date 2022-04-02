@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import Error from "./components/Error";
 import Loading from "./components/Loading";
 import Account from "./components/Account";
+import OwnPosts from "./components/OwnPosts";
 import NewPost from "./components/NewPost";
 import ViewProfile from "./components/ViewProfile";
 import ProjectDetail from "./components/ProjectDetail";
