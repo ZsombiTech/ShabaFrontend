@@ -28,7 +28,7 @@ export default function Card(props) {
   useEffect(() => {
     axios
       .post(
-        `http://localhost:8000/likepost:${props.description}`,
+        `http://localhost:8000/likepost`,
         {
           clicked: isClick,
           id: props.id,
