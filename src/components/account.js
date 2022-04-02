@@ -108,7 +108,7 @@ export default function Account() {
               </div>
             </div>
             <div className="flex flex-column w-48 mb-10">
-              <Button href="/" className="mb-8">
+              <Button href="/ownposts" className="mb-8">
                 My Posts
               </Button>
               <Button href="/mainpage">Back to the main page</Button>

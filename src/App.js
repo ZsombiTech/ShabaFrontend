@@ -114,8 +114,18 @@ function App() {
           <Route path="/projectdetail">
             <HeadNavbar loggedIn={loggedIn} />
             <div className="centered">
-              {loggedIn ? (
+              {loggedInn ? (
                 <ProjectDetail loggedIn={loggedIn} />
+              ) : (
+                <Error loggedIn={loggedIn} />
+              )}
+            </div>
+          </Route>
+          <Route path="/ownposts">
+            <HeadNavbar loggedIn={loggedIn} />
+            <div className="centered">
+              {loggedInn ? (
+                <OwnPosts loggedIn={loggedIn} />
               ) : (
                 <Error loggedIn={loggedIn} />
               )}
