@@ -49,64 +49,71 @@ export default function Account() {
     <>
       {userdatas || or ? (
         <>
-          <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
-            <div className="card p-4">
-              <div className=" image d-flex flex-column justify-content-center align-items-center">
-                <button className="btn btn-secondary">
-                  <img
-                    src="https://i.imgur.com/wvxPV9S.png"
-                    height="100"
-                    width="100"
-                  />
-                </button>
-                <span className="name mt-3">{userdatas.username}</span>
-                <span className="idd">{userdatas.email}</span>
-                <div className="d-flex flex-row justify-content-center align-items-center gap-2">
-                  <span className="idd1">{userdatas._id}</span>
-                  <span>
-                    <i className="fa fa-copy"></i>
-                  </span>
-                </div>
+          <div className="aligncenter2">
+            <div className="container mt-4 mb-2 p-3 d-flex justify-content-center">
+              <div className="card p-4">
+                <div className=" image d-flex flex-column justify-content-center align-items-center">
+                  <button className="btn btn-secondary">
+                    <img
+                      src="https://i.imgur.com/wvxPV9S.png"
+                      height="100"
+                      width="100"
+                    />
+                  </button>
+                  <span className="name mt-3">{userdatas.username}</span>
+                  <span className="idd">{userdatas.email}</span>
+                  <div className="d-flex flex-row justify-content-center align-items-center gap-2">
+                    <span className="idd1">{userdatas._id}</span>
+                    <span>
+                      <i className="fa fa-copy"></i>
+                    </span>
+                  </div>
 
-                {/*<div className=" d-flex mt-2">
+                  {/*<div className=" d-flex mt-2">
                               <button className="btn1 btnn-dark">Edit Profile</button>
       </div>*/}
-                {wantedit ? (
-                  <div className="text mt-3 mb-8 w-52">
-                    {userdatas.description}
-                  </div>
-                ) : (
-                  <textarea
-                    className="edittextarea"
-                    onChange={textareaHandler}
-                    value={userdesc}
-                  ></textarea>
-                )}
-
-                <div className=" d-flex mt-2">
                   {wantedit ? (
-                    <button className="btn1 btnn-dark" onClick={editHandler}>
-                      Edit Description
-                    </button>
+                    <div className="text mt-3 mb-8 w-52">
+                      {userdatas.description}
+                    </div>
                   ) : (
-                    <button
-                      className="btn1 btnn-dark"
-                      onClick={saveEditsHandler}
-                    >
-                      Save edits
-                    </button>
+                    <textarea
+                      className="edittextarea"
+                      onChange={textareaHandler}
+                      value={userdesc}
+                    ></textarea>
                   )}
-                </div>
 
-                <div className=" px-2 rounded mt-4 date ">
-                  <span className="join">
-                    Joined: {userdatas.date.slice(0, 10)}
-                  </span>
+                  <div className=" d-flex mt-2">
+                    {wantedit ? (
+                      <button className="btn1 btnn-dark" onClick={editHandler}>
+                        Edit Description
+                      </button>
+                    ) : (
+                      <button
+                        className="btn1 btnn-dark"
+                        onClick={saveEditsHandler}
+                      >
+                        Save edits
+                      </button>
+                    )}
+                  </div>
+
+                  <div className=" px-2 rounded mt-4 date ">
+                    <span className="join">
+                      Joined: {userdatas.date.slice(0, 10)}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
+            <div className="flex flex-column w-48 mb-10">
+              <Button href="/ownposts" className="mb-8">
+                My Posts
+              </Button>
+              <Button href="/mainpage">Back to the main page</Button>
+            </div>
           </div>
-          <Button href="/mainpage">Back to the main page</Button>
         </>
       ) : (
         <Loading />

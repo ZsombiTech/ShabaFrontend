@@ -39,6 +39,7 @@ export default function Register(props) {
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("username", username);
             props.setLoggedIn(true);
+            props.loggedInn.current = true;
           },
           (error) => {
             console.log(error);

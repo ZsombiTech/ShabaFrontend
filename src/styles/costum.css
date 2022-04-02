@@ -12,6 +12,13 @@
   align-self: center;
 }
 
+.aligncenter2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .card {
   width: 350px;
   background-color: #efefef;

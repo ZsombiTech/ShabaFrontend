@@ -43,6 +43,7 @@ export default function Login(props) {
               localStorage.setItem("token", response.data.token);
               localStorage.setItem("username", username);
               props.setLoggedIn(true);
+              props.loggedInn.current = true;
             } else {
               setMessage(response.data.response);
               togglePopTrue();

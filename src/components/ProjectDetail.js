@@ -3,6 +3,7 @@ import Carddd from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Loading from "./Loading";
 import Error from "./Error";
+import "../styles/costum.css";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
@@ -35,10 +36,14 @@ export default function ProjectDetail(props) {
         <div>
           <h1 className="mt-6 mb-12">Project Details</h1>
           <Carddd style={{ width: "18rem", marginBottom: "5rem" }}>
-            <Carddd.Body>
+            <Carddd.Body className="aligncenter2">
               <Carddd.Img src={userdatas.url}></Carddd.Img>
               <Carddd.Title>{userdatas.description}</Carddd.Title>
               <Carddd.Text>{userdatas.tags}</Carddd.Text>
+              <div className="flex">
+                <label>❤</label>
+                <p className="ml-2">{userdatas.likes}</p>
+              </div>
               <br />
               <br />
               <Carddd.Text>
