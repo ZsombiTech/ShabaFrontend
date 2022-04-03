@@ -16,7 +16,7 @@ export default function Account() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/users:${username}`, config)
+      .get(`http://shababackend.herokuapp.com/users:${username}`, config)
       .then((response) => {
         setUserDatas(response.data.docs[0]);
         setUserDesc(response.data.docs[0].description);
@@ -32,7 +32,7 @@ export default function Account() {
 
     axios
       .post(
-        `http://localhost:8000/setdesc`,
+        `http://shababackend.herokuapp.com/setdesc`,
         { description: userdesc, id: userdatas._id },
         config
       )

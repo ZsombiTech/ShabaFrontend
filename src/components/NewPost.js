@@ -6,26 +6,30 @@ import PopUp from "./PopUp";
 
 export default function NewPost() {
   const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const [shortDesc, setShortDesc] = useState("");
+  const [longDesc, setLongDesc] = useState("");
   const [tags, setTags] = useState("");
   const [url, setUrl] = useState("");
   const [submitted, setSubmitted] = useState();
+  const [checked, setChecked] = useState(true);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };
 
   const submitHandler = () => {
-    if (desc != "" && tags != "") {
+    if (shortDesc != "" && longDesc != "" && title != "" && tags != "") {
       axios
         .post(
-          "http://localhost:8000/userpost",
+          "https://shababackend.herokuapp.com/userpost",
           {
             username: localStorage.getItem("username"),
             title: title,
-            description: desc,
+            shortdescription: shortDesc,
+            longdescription: longDesc,
             tags: tags,
             url: url,
+            private: checked,
           },
           config
         )
@@ -45,8 +49,11 @@ export default function NewPost() {
     setTitle(event.target.value);
   };
 
-  const descInputChange = (event) => {
-    setDesc(event.target.value);
+  const shortDescInputChange = (event) => {
+    setShortDesc(event.target.value);
+  };
+  const longDescInputChange = (event) => {
+    setLongDesc(event.target.value);
   };
 
   const tagsInputChange = (event) => {
@@ -55,6 +62,10 @@ export default function NewPost() {
 
   const urlInputChange = (event) => {
     setUrl(event.target.value);
+  };
+
+  const checkboxHandler = () => {
+    setChecked(!checked);
   };
 
   return (
@@ -83,13 +94,24 @@ export default function NewPost() {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Description</Form.Label>
+            <Form.Group className="mb-3" controlId="formBasisText">
+              <Form.Label>Short Description</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Description"
-                onChange={descInputChange}
-                value={desc}
+                onChange={shortDescInputChange}
+                value={shortDesc}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicText">
+              <Form.Label>Long Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Description"
+                onChange={longDescInputChange}
+                value={longDesc}
                 required
               />
             </Form.Group>
@@ -105,7 +127,13 @@ export default function NewPost() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Everyone can see it" />
+              <Form.Check
+                type="checkbox"
+                label="Show my profile"
+                onChange={checkboxHandler}
+                defaultValue={checked}
+                checked={checked}
+              />
             </Form.Group>
             <Button
               variant="primary"

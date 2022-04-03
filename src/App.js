@@ -17,13 +17,19 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const loggedInn = useRef(false);
-
+  const [searchword, setSearchWord] = useState(" ");
+  const [refresh, setRefresh] = useState(true);
   const [postData, setPostData] = useState();
+  const [searched, setSearched] = useState(false);
+  const [usernamee, setUsernamee] = useState();
+
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };
   useEffect(() => {
-    axios.post("http://localhost:8000/posts", {}, config).then(
+    setUsernamee(localStorage.getItem("username"));
+
+    axios.post("http://shababackend.herokuapp.com/posts", {}, config).then(
       (res) => {
         if (res.data.response === "Good") {
           loggedInn.current = true;
@@ -78,10 +84,24 @@ function App() {
             </div>
           </Route>
           <Route path="/mainpage">
-            <HeadNavbar loggedIn={loggedIn} />
+            <HeadNavbar
+              loggedIn={loggedIn}
+              main={true}
+              setSearchWord={setSearchWord}
+              setRefresh={setRefresh}
+              setSearched={setSearched}
+              usernamee={usernamee}
+            />
             <div className="centered">
-              {postData ? (
-                <MainPage postData={postData.reverse()} loggedIn={loggedIn} />
+              {postData && refresh ? (
+                <MainPage
+                  postData={postData.reverse()}
+                  loggedIn={loggedIn}
+                  searchword={searchword}
+                  refresh={refresh}
+                  searched={searched}
+                  setSearched={setSearched}
+                />
               ) : loggedInn ? (
                 <Loading />
               ) : (
@@ -90,19 +110,19 @@ function App() {
             </div>
           </Route>
           <Route path="/account">
-            <HeadNavbar loggedIn={loggedIn} />
+            <HeadNavbar loggedIn={loggedIn} usernamee={usernamee} />
             <div className="centered">
               {loggedInn ? <Account /> : <Error />}
             </div>
           </Route>
           <Route path="/newpost">
-            <HeadNavbar loggedIn={loggedIn} />
+            <HeadNavbar loggedIn={loggedIn} usernamee={usernamee} />
             <div className="centered">
               {loggedInn ? <NewPost /> : <Error />}
             </div>
           </Route>
           <Route path="/viewprofile">
-            <HeadNavbar loggedIn={loggedIn} />
+            <HeadNavbar loggedIn={loggedIn} usernamee={usernamee} />
             <div className="centered">
               {loggedInn ? (
                 <ViewProfile loggedIn={loggedIn} />
@@ -112,7 +132,7 @@ function App() {
             </div>
           </Route>
           <Route path="/projectdetail">
-            <HeadNavbar loggedIn={loggedIn} />
+            <HeadNavbar loggedIn={loggedIn} usernamee={usernamee} />
             <div className="centered">
               {loggedInn ? (
                 <ProjectDetail loggedIn={loggedIn} />
@@ -122,7 +142,7 @@ function App() {
             </div>
           </Route>
           <Route path="/ownposts">
-            <HeadNavbar loggedIn={loggedIn} />
+            <HeadNavbar loggedIn={loggedIn} usernamee={usernamee} />
             <div className="centered">
               {loggedInn ? (
                 <OwnPosts loggedIn={loggedIn} />
@@ -132,7 +152,7 @@ function App() {
             </div>
           </Route>
           <Route>
-            <HeadNavbar loggedIn={loggedIn} />
+            <HeadNavbar loggedIn={loggedIn} usernamee={usernamee} />
             <Error loggedIn={loggedIn} />
           </Route>
         </Switch>

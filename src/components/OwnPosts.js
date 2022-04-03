@@ -15,12 +15,13 @@ export default function OwnPosts() {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8000/ownposts:${localStorage.getItem("username")}`,
+        `http://shababackend.herokuapp.com/ownposts:${localStorage.getItem(
+          "username"
+        )}`,
         config
       )
       .then((response) => {
         setPostData(response.data);
-        console.log(response.data);
       });
   }, [refr]);
 
