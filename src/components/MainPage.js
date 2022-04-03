@@ -7,7 +7,7 @@ export default function MainPage(props) {
   return (
     <>
       <div className="mt-20">
-        {props.refresh && props.postData.length > 0 ? (
+        {props.refresh && props.postData ? (
           props.loggedIn ? (
             props.postData.map((data, key) =>
               props.searchword.length < 1 ? (
