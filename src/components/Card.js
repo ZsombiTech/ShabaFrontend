@@ -51,9 +51,7 @@ export default function Card(props) {
         config
       )
       .then(
-        (response) => {
-          console.log(response);
-        },
+        (response) => {},
         (error) => {
           console.log(error);
         }

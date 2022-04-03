@@ -2,8 +2,32 @@ import React, { Fragment, useState, useEffect } from "react";
 import Cardd from "./Card";
 import Loading from "./Loading";
 import Error from "./Error";
+import axios from "axios";
 
 export default function MainPage(props) {
+  const [results, getResults] = useState();
+
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  };
+
+  useEffect(() => {
+    axios
+      .post(
+        "http://localhost:8000/searchword",
+        { word: props.searchword },
+        config
+      )
+      .then(
+        (res) => {
+          console.log(res.data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  });
+
   return (
     <>
       <div className="mt-20">

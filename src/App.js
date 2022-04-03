@@ -62,8 +62,6 @@ function App() {
     }
   }
 
-  console.log(refresh);
-
   return (
     <Router>
       <div className="App">
