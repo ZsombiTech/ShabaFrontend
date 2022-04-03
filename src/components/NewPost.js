@@ -105,7 +105,7 @@ export default function NewPost() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Everyone can see it" />
+              <Form.Check type="checkbox" label="Show my profile" />
             </Form.Group>
             <Button
               variant="primary"

@@ -78,7 +78,7 @@ function App() {
             </div>
           </Route>
           <Route path="/mainpage">
-            <HeadNavbar loggedIn={loggedIn} />
+            <HeadNavbar loggedIn={loggedIn} main={true} />
             <div className="centered">
               {postData ? (
                 <MainPage postData={postData.reverse()} loggedIn={loggedIn} />

@@ -39,7 +39,9 @@ export default function ProjectDetail(props) {
             <Carddd.Body className="aligncenter2">
               <Carddd.Img src={userdatas.url}></Carddd.Img>
               <Carddd.Title>{userdatas.description}</Carddd.Title>
-              <Carddd.Text>{userdatas.tags}</Carddd.Text>
+              <Carddd.Text>
+                {userdatas.tags.map((item) => `#${item}`)}
+              </Carddd.Text>
               <div className="flex">
                 <label>❤</label>
                 <p className="ml-2">{userdatas.likes}</p>
