@@ -70,7 +70,9 @@ export default function Card(props) {
         <Carddd.Text className="mb-1 text-base">
           {props.description}
         </Carddd.Text>
-        <Carddd.Text className="text-sm">{props.tags}</Carddd.Text>
+        <Carddd.Text className="text-sm">
+          {props.tags.map((item) => `#${item}`)}
+        </Carddd.Text>
         <Link onClick={handleButton} to="/projectdetail">
           <Button variant="primary">Check it out</Button>
         </Link>
