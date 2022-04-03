@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     setUsernamee(localStorage.getItem("username"));
 
-    axios.post("http://localhost:8000/posts", {}, config).then(
+    axios.post("http://shababackend.herokuapp.com/posts", {}, config).then(
       (res) => {
         if (res.data.response === "Good") {
           loggedInn.current = true;

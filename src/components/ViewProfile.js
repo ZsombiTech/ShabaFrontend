@@ -16,7 +16,7 @@ export default function ViewProfile(props) {
   useEffect(() => {
     const searchusername = localStorage.getItem("searchusername");
     axios
-      .get(`http://localhost:8000/users:${searchusername}`, config)
+      .get(`http://shababackend.herokuapp.com/users:${searchusername}`, config)
       .then((response) => {
         setUserDatas(response.data.docs[0]);
         console.log(response.data.docs[0]);

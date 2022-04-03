@@ -21,7 +21,7 @@ export default function NewPost() {
     if (shortDesc != "" && longDesc != "" && title != "" && tags != "") {
       axios
         .post(
-          "http://localhost:8000/userpost",
+          "https://shababackend.herokuapp.com/userpost",
           {
             username: localStorage.getItem("username"),
             title: title,

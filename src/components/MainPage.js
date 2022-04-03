@@ -15,7 +15,7 @@ export default function MainPage(props) {
   useEffect(() => {
     axios
       .post(
-        "http://localhost:8000/searchword",
+        "http://shababackend.herokuapp.com/searchword",
         { word: props.searchword },
         config
       )

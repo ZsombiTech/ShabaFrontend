@@ -24,7 +24,7 @@ export default function ProjectDetail(props) {
   useEffect(() => {
     const projectName = localStorage.getItem("projectname");
     axios
-      .get(`http://localhost:8000/findpost:${projectName}`, config)
+      .get(`http://shababackend.herokuapp.com/findpost:${projectName}`, config)
       .then((response) => {
         setUserDatas(response.data[0]);
       });

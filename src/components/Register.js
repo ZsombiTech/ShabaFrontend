@@ -31,7 +31,7 @@ export default function Register(props) {
     }
     if (!blank) {
       axios
-        .post("http://localhost:8000/auth/register", {
+        .post("http://shababackend.herokuapp.com/auth/register", {
           username: username,
           email: email,
           password: password,

@@ -40,7 +40,7 @@ export default function Card(props) {
 
     axios
       .post(
-        `http://localhost:8000/likepost`,
+        `http://shababackend.herokuapp.com/likepost`,
         {
           clicked: isClick,
           id: props.id,

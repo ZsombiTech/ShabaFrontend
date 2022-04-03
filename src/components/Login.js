@@ -30,7 +30,7 @@ export default function Login(props) {
     }
     if (!blank) {
       axios
-        .post("http://localhost:8000/auth/login", {
+        .post("http://shababackend.herokuapp.com/auth/login", {
           username: username,
           password: password,
         })

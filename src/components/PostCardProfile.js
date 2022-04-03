@@ -20,7 +20,7 @@ export default function PostCardProfile(props) {
     props.setRefr(false);
     axios
       .post(
-        "http://localhost:8000/deletepost",
+        "http://shababackend.herokuapp.com/deletepost",
         {
           id: props.item._id,
         },
