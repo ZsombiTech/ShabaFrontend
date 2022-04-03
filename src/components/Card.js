@@ -14,6 +14,7 @@ export default function Card(props) {
   const handleLink = () => {
     localStorage.setItem("searchusername", props.username);
   };
+
   const handleButton = () => {
     localStorage.setItem("projectname", props.description);
   };
