@@ -35,11 +35,14 @@ export default function ProjectDetail(props) {
       {userdatas ? (
         <div>
           <h1 className="mt-6 mb-12">Project Details</h1>
-          <Carddd style={{ width: "18rem", marginBottom: "5rem" }}>
+          <Carddd style={{ width: "18rem", marginBottom: "3rem" }}>
             <Carddd.Body className="aligncenter2">
               <Carddd.Img src={userdatas.url}></Carddd.Img>
-              <Carddd.Title>{userdatas.description}</Carddd.Title>
-              <Carddd.Text>
+              <Carddd.Title className="mb-3 ">{userdatas.title}</Carddd.Title>
+              <Carddd.Text className="mb-1 text-base">
+                {userdatas.description}
+              </Carddd.Text>
+              <Carddd.Text className="text-sm">
                 {userdatas.tags.map((item) => `#${item}`)}
               </Carddd.Text>
               <div className="flex">
@@ -55,7 +58,9 @@ export default function ProjectDetail(props) {
               </Carddd.Text>
             </Carddd.Body>
           </Carddd>
-          <Button href="/mainpage">Back to the main page</Button>
+          <Button href="/mainpage" className="mb-10">
+            Back to the main page
+          </Button>
         </div>
       ) : projectNamee ? (
         <Loading />

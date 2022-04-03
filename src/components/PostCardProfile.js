@@ -44,8 +44,11 @@ export default function PostCardProfile(props) {
         <Carddd style={{ width: "18rem", marginBottom: "3rem" }}>
           <Carddd.Body className="aligncenter2">
             <Carddd.Img src={props.item.url}></Carddd.Img>
-            <Carddd.Title>{props.item.description}</Carddd.Title>
-            <Carddd.Text>{props.item.tags}</Carddd.Text>
+            <Carddd.Title className="mb-3 ">{props.item.title}</Carddd.Title>
+            <Carddd.Text className="mb-1 text-base">
+              {props.item.description}
+            </Carddd.Text>
+            <Carddd.Text className="text-sm">{props.item.tags}</Carddd.Text>
             <div className="flex">
               <label>❤</label>
               <p className="ml-2">{props.item.likes}</p>
