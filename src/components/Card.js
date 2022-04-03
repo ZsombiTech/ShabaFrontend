@@ -66,8 +66,11 @@ export default function Card(props) {
     >
       <Carddd.Body>
         <Carddd.Img src={props.url}></Carddd.Img>
-        <Carddd.Title>{props.description}</Carddd.Title>
-        <Carddd.Text>{props.tags}</Carddd.Text>
+        <Carddd.Title className="mb-3 ">{props.title}</Carddd.Title>
+        <Carddd.Text className="mb-1 text-base">
+          {props.description}
+        </Carddd.Text>
+        <Carddd.Text className="text-sm">{props.tags}</Carddd.Text>
         <Link onClick={handleButton} to="/projectdetail">
           <Button variant="primary">Check it out</Button>
         </Link>

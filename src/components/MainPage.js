@@ -14,6 +14,7 @@ export default function MainPage(props) {
               <Cardd
                 key={key}
                 username={data.username}
+                title={data.title}
                 description={data.description}
                 tags={data.tags}
                 url={data.url}
