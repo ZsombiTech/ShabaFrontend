@@ -17,7 +17,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const loggedInn = useRef(false);
-  const [searchword, setSearchWord] = useState("");
+  const [searchword, setSearchWord] = useState(" ");
   const [refresh, setRefresh] = useState(true);
   const [postData, setPostData] = useState();
   const [searched, setSearched] = useState(false);

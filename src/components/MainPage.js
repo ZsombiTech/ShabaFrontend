@@ -6,13 +6,11 @@ import axios from "axios";
 
 export default function MainPage(props) {
   const [results, setResults] = useState();
+  const [blank, setBlank] = useState(false);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };
-
-  if (props.searched) {
-  }
 
   useEffect(() => {
     axios
@@ -24,12 +22,17 @@ export default function MainPage(props) {
       .then(
         (res) => {
           console.log(res.data);
-          setResults(res.data);
+          setResults(res.data.reverse());
         },
         (err) => {
           console.log(err);
         }
       );
+    if (!props.searchword) {
+      setBlank(true);
+    } else {
+      setBlank(false);
+    }
   }, [props.searchword]);
 
   return (
@@ -37,7 +40,7 @@ export default function MainPage(props) {
       <div className="mt-20">
         {props.refresh && props.postData ? (
           props.loggedIn ? (
-            props.searched ? (
+            props.searched && !blank ? (
               results.length > 0 ? (
                 results.map((item, i) => (
                   <Cardd
