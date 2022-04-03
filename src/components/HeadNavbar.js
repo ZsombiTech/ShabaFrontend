@@ -14,7 +14,7 @@ export default function HeadNavbar(props) {
 
   useEffect(() => {
     setUsername(localStorage.getItem("username"));
-  });
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("username");
@@ -27,7 +27,12 @@ export default function HeadNavbar(props) {
     setSearchWords(event.target.value);
   };
 
-  const handleSearchButton = () => {};
+  const handleSearchButton = () => {
+    props.setRefresh(false);
+    props.setSearchWord(searchwords);
+    console.log(searchwords);
+    props.setRefresh(true);
+  };
 
   return (
     <Navbar bg="light" expand="lg">

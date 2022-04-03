@@ -17,8 +17,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const loggedInn = useRef(false);
-
+  const [searchword, setSearchWord] = useState("");
+  const [refresh, setRefresh] = useState(true);
   const [postData, setPostData] = useState();
+
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };
@@ -60,6 +62,8 @@ function App() {
     }
   }
 
+  console.log(refresh);
+
   return (
     <Router>
       <div className="App">
@@ -78,10 +82,20 @@ function App() {
             </div>
           </Route>
           <Route path="/mainpage">
-            <HeadNavbar loggedIn={loggedIn} main={true} />
+            <HeadNavbar
+              loggedIn={loggedIn}
+              main={true}
+              setSearchWord={setSearchWord}
+              setRefresh={setRefresh}
+            />
             <div className="centered">
-              {postData ? (
-                <MainPage postData={postData.reverse()} loggedIn={loggedIn} />
+              {postData && refresh ? (
+                <MainPage
+                  postData={postData.reverse()}
+                  loggedIn={loggedIn}
+                  searchword={searchword}
+                  refresh={refresh}
+                />
               ) : loggedInn ? (
                 <Loading />
               ) : (
