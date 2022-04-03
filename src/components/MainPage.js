@@ -68,6 +68,7 @@ export default function MainPage(props) {
                   url={data.url}
                   id={data._id}
                   likedBy={data.likedBy}
+                  private={data.private}
                 />
               ))
             )

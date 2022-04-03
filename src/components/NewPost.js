@@ -11,6 +11,7 @@ export default function NewPost() {
   const [tags, setTags] = useState("");
   const [url, setUrl] = useState("");
   const [submitted, setSubmitted] = useState();
+  const [checked, setChecked] = useState(false);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -28,6 +29,7 @@ export default function NewPost() {
             longdescription: longDesc,
             tags: tags,
             url: url,
+            private: !checked,
           },
           config
         )
@@ -60,6 +62,12 @@ export default function NewPost() {
 
   const urlInputChange = (event) => {
     setUrl(event.target.value);
+  };
+
+  const checkboxHandler = () => {
+    setChecked(!checked);
+
+    console.log(checked);
   };
 
   return (
@@ -121,7 +129,13 @@ export default function NewPost() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Show my profile" />
+              <Form.Check
+                type="checkbox"
+                label="Show my profile"
+                onChange={checkboxHandler}
+                defaultValue={checked}
+                checked={checked}
+              />
             </Form.Group>
             <Button
               variant="primary"

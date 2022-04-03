@@ -51,11 +51,13 @@ export default function ProjectDetail(props) {
               </div>
               <br />
               <br />
-              <Carddd.Text>
-                <Link onClick={handleLink} to="/viewprofile">
-                  Posted by {userdatas.username}
-                </Link>
-              </Carddd.Text>
+              {userdatas.private && (
+                <Carddd.Text>
+                  <Link onClick={handleLink} to="/viewprofile">
+                    Posted by {userdatas.username}
+                  </Link>
+                </Carddd.Text>
+              )}
             </Carddd.Body>
           </Carddd>
           <Button href="/mainpage" className="mb-10">

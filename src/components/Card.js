@@ -16,7 +16,7 @@ export default function Card(props) {
   };
 
   const handleButton = () => {
-    localStorage.setItem("projectname", props.description);
+    localStorage.setItem("projectname", props.title);
   };
 
   const heartHandler = () => {
@@ -76,11 +76,13 @@ export default function Card(props) {
         </Link>
         <br />
         <br />
-        <Carddd.Text>
-          <Link onClick={handleLink} to="/viewprofile">
-            Posted by {props.username}
-          </Link>
-        </Carddd.Text>
+        {props.private && (
+          <Carddd.Text>
+            <Link onClick={handleLink} to="/viewprofile">
+              Posted by {props.username}
+            </Link>
+          </Carddd.Text>
+        )}
       </Carddd.Body>
       <Heart isClick={isClick} onClick={heartHandler} className="heart" />
     </Carddd>

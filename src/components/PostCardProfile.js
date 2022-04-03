@@ -12,7 +12,7 @@ export default function PostCardProfile(props) {
   };
 
   const handleButton = () => {
-    localStorage.setItem("projectname", props.item.description);
+    localStorage.setItem("projectname", props.item.title);
   };
 
   const deleteHandler = () => {
