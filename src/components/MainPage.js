@@ -5,11 +5,14 @@ import Error from "./Error";
 import axios from "axios";
 
 export default function MainPage(props) {
-  const [results, getResults] = useState();
+  const [results, setResults] = useState();
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };
+
+  if (props.searched) {
+  }
 
   useEffect(() => {
     axios
@@ -21,20 +24,38 @@ export default function MainPage(props) {
       .then(
         (res) => {
           console.log(res.data);
+          setResults(res.data);
         },
         (err) => {
           console.log(err);
         }
       );
-  });
+  }, [props.searchword]);
 
   return (
     <>
       <div className="mt-20">
         {props.refresh && props.postData ? (
           props.loggedIn ? (
-            props.postData.map((data, key) =>
-              props.searchword.length < 1 ? (
+            props.searched ? (
+              results.length > 0 ? (
+                results.map((item, i) => (
+                  <Cardd
+                    key={i}
+                    username={item.username}
+                    title={item.title}
+                    description={item.description}
+                    tags={item.tags}
+                    url={item.url}
+                    id={item._id}
+                    likedBy={item.likedBy}
+                  />
+                ))
+              ) : (
+                <Loading trueee={true} />
+              )
+            ) : (
+              props.postData.map((data, key) => (
                 <Cardd
                   key={key}
                   username={data.username}
@@ -45,21 +66,7 @@ export default function MainPage(props) {
                   id={data._id}
                   likedBy={data.likedBy}
                 />
-              ) : (
-                (data.title.includes(props.searchword) ||
-                  data.tags.includes(props.searchword)) && (
-                  <Cardd
-                    key={key}
-                    username={data.username}
-                    title={data.title}
-                    description={data.description}
-                    tags={data.tags}
-                    url={data.url}
-                    id={data._id}
-                    likedBy={data.likedBy}
-                  />
-                )
-              )
+              ))
             )
           ) : (
             <Error />

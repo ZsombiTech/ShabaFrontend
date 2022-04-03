@@ -20,6 +20,7 @@ function App() {
   const [searchword, setSearchWord] = useState("");
   const [refresh, setRefresh] = useState(true);
   const [postData, setPostData] = useState();
+  const [searched, setSearched] = useState(false);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -85,6 +86,7 @@ function App() {
               main={true}
               setSearchWord={setSearchWord}
               setRefresh={setRefresh}
+              setSearched={setSearched}
             />
             <div className="centered">
               {postData && refresh ? (
@@ -93,6 +95,8 @@ function App() {
                   loggedIn={loggedIn}
                   searchword={searchword}
                   refresh={refresh}
+                  searched={searched}
+                  setSearched={setSearched}
                 />
               ) : loggedInn ? (
                 <Loading />

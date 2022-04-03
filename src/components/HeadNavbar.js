@@ -28,6 +28,7 @@ export default function HeadNavbar(props) {
   };
 
   const handleSearchButton = () => {
+    props.setSearched(true);
     props.setRefresh(false);
     props.setSearchWord(searchwords);
     console.log(searchwords);

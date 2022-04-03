@@ -45,7 +45,6 @@ export default function Card(props) {
           clicked: isClick,
           id: props.id,
           first: first,
-
           username: localStorage.getItem("username"),
         },
         config
