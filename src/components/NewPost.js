@@ -5,6 +5,7 @@ import axios from "axios";
 import PopUp from "./PopUp";
 
 export default function NewPost() {
+  const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [tags, setTags] = useState("");
   const [url, setUrl] = useState("");
@@ -21,6 +22,7 @@ export default function NewPost() {
           "http://localhost:8000/userpost",
           {
             username: localStorage.getItem("username"),
+            title: title,
             description: desc,
             tags: tags,
             url: url,
@@ -39,9 +41,14 @@ export default function NewPost() {
     }
   };
 
+  const titleInputChange = (event) => {
+    setTitle(event.target.value);
+  };
+
   const descInputChange = (event) => {
     setDesc(event.target.value);
   };
+
   const tagsInputChange = (event) => {
     setTags(event.target.value);
   };
@@ -56,7 +63,7 @@ export default function NewPost() {
         <div className="aligncenter">
           <h1 className="mb-11">Publish a new post</h1>
           <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-2" controlId="formBasicImage">
               <Form.Label>Image URL (not required)</Form.Label>
               <Form.Control
                 type="url"
@@ -65,6 +72,18 @@ export default function NewPost() {
                 onChange={urlInputChange}
                 value={url}
               />
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="formBasicText">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Title"
+                onChange={titleInputChange}
+                value={title}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Description</Form.Label>
               <Form.Control
                 type="text"
