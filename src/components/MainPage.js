@@ -39,7 +39,7 @@ export default function MainPage(props) {
     <>
       <div className="mt-20">
         {props.refresh && props.postData ? (
-          props.loggedIn ? (
+          props.loggedIn && props.postData.length > 0 ? (
             props.searched && !blank ? (
               results.length > 0 ? (
                 results.map((item, i) => (
@@ -47,7 +47,7 @@ export default function MainPage(props) {
                     key={i}
                     username={item.username}
                     title={item.title}
-                    description={item.description}
+                    shortdescription={item.shortdescription}
                     tags={item.tags}
                     url={item.url}
                     id={item._id}
@@ -63,7 +63,7 @@ export default function MainPage(props) {
                   key={key}
                   username={data.username}
                   title={data.title}
-                  description={data.description}
+                  shortdescription={data.shortdescription}
                   tags={data.tags}
                   url={data.url}
                   id={data._id}
@@ -71,8 +71,10 @@ export default function MainPage(props) {
                 />
               ))
             )
-          ) : (
+          ) : props.postData.length > 0 ? (
             <Error />
+          ) : (
+            <Loading trueeee={true} />
           )
         ) : (
           <Loading trueeee={true} />

@@ -40,7 +40,7 @@ export default function ProjectDetail(props) {
               <Carddd.Img src={userdatas.url}></Carddd.Img>
               <Carddd.Title className="mb-3 ">{userdatas.title}</Carddd.Title>
               <Carddd.Text className="mb-1 text-base">
-                {userdatas.description}
+                {userdatas.longdescription}
               </Carddd.Text>
               <Carddd.Text className="text-sm">
                 {userdatas.tags.map((item) => `#${item}`)}

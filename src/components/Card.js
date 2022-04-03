@@ -66,7 +66,7 @@ export default function Card(props) {
         <Carddd.Img src={props.url}></Carddd.Img>
         <Carddd.Title className="mb-3 ">{props.title}</Carddd.Title>
         <Carddd.Text className="mb-1 text-base">
-          {props.description}
+          {props.shortdescription}
         </Carddd.Text>
         <Carddd.Text className="text-sm">
           {props.tags.map((item) => `#${item}`)}

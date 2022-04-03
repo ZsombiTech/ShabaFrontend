@@ -9,7 +9,7 @@ export default function Loading(props) {
     text = "No results found";
   }
   if (props.trueeee) {
-    text = "No posts";
+    text = "No posts to show";
   }
   return <h1 className="mt-36">{text}</h1>;
 }
