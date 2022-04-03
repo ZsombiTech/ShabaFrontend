@@ -3,11 +3,16 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Loading from "./Loading";
 import Carddd from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 export default function PostCardProfile(props) {
   const [refr, setRefr] = useState(true);
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  };
+
+  const handleButton = () => {
+    localStorage.setItem("projectname", props.item.description);
   };
 
   const deleteHandler = () => {
@@ -45,6 +50,10 @@ export default function PostCardProfile(props) {
               <label>❤</label>
               <p className="ml-2">{props.item.likes}</p>
             </div>
+            <br />
+            <Link onClick={handleButton} to="/projectdetail">
+              <Button variant="primary">Check it out</Button>
+            </Link>
             <br />
             <Button variant="danger" onClick={deleteHandler}>
               Delete
