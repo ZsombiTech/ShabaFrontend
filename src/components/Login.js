@@ -16,12 +16,10 @@ export default function Login(props) {
 
   const togglePopFalse = () => {
     setSeen(false);
-    console.log(seen);
   };
 
   const togglePopTrue = () => {
     setSeen(true);
-    console.log(seen);
   };
   const submitForm = (event) => {
     if (username != "" || password != "") {
@@ -39,9 +37,9 @@ export default function Login(props) {
         .then(
           (response) => {
             if (response.data.response == "correct") {
-              history.push("/mainpage");
               localStorage.setItem("token", response.data.token);
               localStorage.setItem("username", username);
+              history.push("/mainpage");
               props.setLoggedIn(true);
               props.loggedInn.current = true;
             } else {
@@ -103,7 +101,7 @@ export default function Login(props) {
           </Form>
         </div>
       </div>
-      <a href="/register">Already have an account?</a>
+      <a href="/register">Don't have an account yet?</a>
       {seen && <PopUp toggle={togglePopFalse} message={message} />}
     </>
   );

@@ -16,7 +16,7 @@ export default function Card(props) {
   };
 
   const handleButton = () => {
-    localStorage.setItem("projectname", props.description);
+    localStorage.setItem("projectname", props.title);
   };
 
   const heartHandler = () => {
@@ -45,15 +45,12 @@ export default function Card(props) {
           clicked: isClick,
           id: props.id,
           first: first,
-
           username: localStorage.getItem("username"),
         },
         config
       )
       .then(
-        (response) => {
-          console.log(response);
-        },
+        (response) => {},
         (error) => {
           console.log(error);
         }
@@ -69,7 +66,7 @@ export default function Card(props) {
         <Carddd.Img src={props.url}></Carddd.Img>
         <Carddd.Title className="mb-3 ">{props.title}</Carddd.Title>
         <Carddd.Text className="mb-1 text-base">
-          {props.description}
+          {props.shortdescription}
         </Carddd.Text>
         <Carddd.Text className="text-sm">
           {props.tags.map((item) => `#${item}`)}
@@ -79,11 +76,13 @@ export default function Card(props) {
         </Link>
         <br />
         <br />
-        <Carddd.Text>
-          <Link onClick={handleLink} to="/viewprofile">
-            Posted by {props.username}
-          </Link>
-        </Carddd.Text>
+        {props.private && (
+          <Carddd.Text>
+            <Link onClick={handleLink} to="/viewprofile">
+              Posted by {props.username}
+            </Link>
+          </Carddd.Text>
+        )}
       </Carddd.Body>
       <Heart isClick={isClick} onClick={heartHandler} className="heart" />
     </Carddd>

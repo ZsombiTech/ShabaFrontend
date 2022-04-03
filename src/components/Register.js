@@ -15,11 +15,13 @@ export default function Register(props) {
   const [message, setMessage] = useState();
   const [seen, setSeen] = useState(false);
 
-  const togglePop = () => {
-    setSeen((seen) => !seen);
-    console.log(seen);
+  const togglePopFalse = () => {
+    setSeen(false);
   };
 
+  const togglePopTrue = () => {
+    setSeen(true);
+  };
   const submitForm = (event) => {
     if (username != "" && email != "" && password != "") {
       event.preventDefault();
@@ -36,18 +38,21 @@ export default function Register(props) {
         })
         .then(
           (response) => {
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("username", username);
-            props.setLoggedIn(true);
-            props.loggedInn.current = true;
+            if (response.data.response != "Already exits") {
+              localStorage.setItem("token", response.data.token);
+              localStorage.setItem("username", username);
+              history.push("/mainpage");
+              props.setLoggedIn(true);
+              props.loggedInn.current = true;
+            } else {
+              setMessage(response.data.response);
+              togglePopTrue();
+            }
           },
           (error) => {
             console.log(error);
           }
-        )
-        .then(() => {
-          history.push("/mainpage");
-        });
+        );
     }
   };
 
@@ -110,8 +115,8 @@ export default function Register(props) {
             </Button>
           </Form>
         </div>
-        <a href="/login">Login to your account</a>
-        {seen && <PopUp toggle={togglePop} message={message} />}
+        <a href="/login">Already have an account?</a>
+        {seen && <PopUp toggle={togglePopFalse} message={message} />}
       </div>
     </>
   );
