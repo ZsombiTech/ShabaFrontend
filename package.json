@@ -2,13 +2,14 @@
   "name": "shabafrontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/login",
+  "homepage": "https://zsombitech.github.io/shabafrontend/login",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
     "bootstrap": "^5.1.3",
+    "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-animated-heart": "^0.0.7-alpha.1",
     "react-bootstrap": "^2.2.1",
@@ -19,6 +20,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build", 
+    "deploy": "gh-pages -d build", 
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -47,5 +50,9 @@
     "postcss": "^8.4.12",
     "rimraf": "^3.0.2",
     "tailwindcss": "^3.0.23"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/ZsombiTech/shabafrontend.git",
+  "author": "ZsombiTech <horvathzsombor2005@gmail.com>",
+  "license": "MIT"
 }
