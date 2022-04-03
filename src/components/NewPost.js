@@ -11,7 +11,7 @@ export default function NewPost() {
   const [tags, setTags] = useState("");
   const [url, setUrl] = useState("");
   const [submitted, setSubmitted] = useState();
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -29,7 +29,7 @@ export default function NewPost() {
             longdescription: longDesc,
             tags: tags,
             url: url,
-            private: !checked,
+            private: checked,
           },
           config
         )
@@ -66,8 +66,6 @@ export default function NewPost() {
 
   const checkboxHandler = () => {
     setChecked(!checked);
-
-    console.log(checked);
   };
 
   return (

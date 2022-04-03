@@ -27,7 +27,6 @@ export default function ProjectDetail(props) {
       .get(`http://localhost:8000/findpost:${projectName}`, config)
       .then((response) => {
         setUserDatas(response.data[0]);
-        console.log(response.data[0]);
       });
   }, []);
   return (

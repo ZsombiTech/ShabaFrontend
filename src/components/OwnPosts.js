@@ -20,7 +20,6 @@ export default function OwnPosts() {
       )
       .then((response) => {
         setPostData(response.data);
-        console.log(response.data);
       });
   }, [refr]);
 

@@ -9,12 +9,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "../styles/costum.css";
 
 export default function HeadNavbar(props) {
-  const [username, setUsername] = useState("");
   const [searchwords, setSearchWords] = useState();
-
-  useEffect(() => {
-    setUsername(localStorage.getItem("username"));
-  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("username");
@@ -31,7 +26,6 @@ export default function HeadNavbar(props) {
     props.setSearched(true);
     props.setRefresh(false);
     props.setSearchWord(searchwords);
-    console.log(searchwords);
     props.setRefresh(true);
   };
 
@@ -54,7 +48,7 @@ export default function HeadNavbar(props) {
                 navbarScroll
               >
                 <Navbar.Text className="addmgright">
-                  <a href="/account"> Signed in as: {username}</a>
+                  <a href="/account"> Signed in as: {props.usernamee}</a>
                 </Navbar.Text>
 
                 <Button href="/newpost" className="addmgright2">
@@ -71,6 +65,7 @@ export default function HeadNavbar(props) {
                     type="search"
                     value={searchwords}
                     onChange={handleSearchBar}
+                    placeholder="Search by tag"
                     className="me-2"
                     aria-label="Search"
                   />

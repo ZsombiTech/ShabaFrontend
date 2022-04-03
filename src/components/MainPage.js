@@ -21,7 +21,6 @@ export default function MainPage(props) {
       )
       .then(
         (res) => {
-          console.log(res.data);
           setResults(res.data.reverse());
         },
         (err) => {
