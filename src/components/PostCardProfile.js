@@ -48,7 +48,9 @@ export default function PostCardProfile(props) {
             <Carddd.Text className="mb-1 text-base">
               {props.item.description}
             </Carddd.Text>
-            <Carddd.Text className="text-sm">{props.item.tags}</Carddd.Text>
+            <Carddd.Text className="text-sm">
+              {props.item.tags.map((item) => `#${item}`)}
+            </Carddd.Text>
             <div className="flex">
               <label>❤</label>
               <p className="ml-2">{props.item.likes}</p>
